@@ -1,13 +1,18 @@
 import { AsyncStorage } from 'react-native';
 import { getMetricMetaInfo, timeToString } from './helpers';
 
-export const CALENDAR_STORAGE_KEY = 'UdaciFitness:calendar';
+const CALENDAR_STORAGE_KEY = 'UdaciFitness:calendar';
 
-function getRandomNumber(max) {
-  return Math.floor(Math.random() * max) + 0;
-}
+/**
+ * Gets a random number up until max (exclusive)
+ * @param {number} max Maximum number (exclusive)
+ */
+const getRandomNumber = max => Math.floor(Math.random() * max);
 
-function setDummyData() {
+/**
+ * Sets dummy data and return it
+ */
+const setDummyData = () => {
   const { run, bike, swim, sleep, eat } = getMetricMetaInfo();
 
   const dummyData = {};
@@ -31,9 +36,13 @@ function setDummyData() {
   AsyncStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(dummyData));
 
   return dummyData;
-}
+};
 
-function setMissingDates(dates) {
+/**
+ * Sets the missing dates
+ * @param {{ [strTime: string]: any; }} dates
+ */
+const setMissingDates = dates => {
   const timestamp = Date.now();
 
   for (let i = -183; i < 0; i++) {
@@ -46,10 +55,13 @@ function setMissingDates(dates) {
   }
 
   return dates;
-}
+};
 
-export function formatCalendarResults(results) {
-  return results === null
-    ? setDummyData()
-    : setMissingDates(JSON.parse(results));
-}
+/**
+ * Returns the calendar results formatted
+ * @param {string} results Results in JSON format
+ */
+const formatCalendarResults = results =>
+  results === null ? setDummyData() : setMissingDates(JSON.parse(results));
+
+export { CALENDAR_STORAGE_KEY, formatCalendarResults };

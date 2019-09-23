@@ -5,15 +5,20 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from '@expo/vector-icons';
-import { white } from './colors';
+import { blue } from './colors';
 
-export function getDailyReminderValue() {
-  return {
-    today: "👋 Don't forget to log your data today!",
-  };
-}
+/**
+ * Gets a daily reminder
+ */
+const getDailyReminderValue = () => ({
+  today: "👋 Don't forget to log your data today!",
+});
 
-export function getMetricMetaInfo(metric) {
+/**
+ * Gets info about a metric
+ * @param {string} metric Name of the metric
+ */
+const getMetricMetaInfo = (metric = '') => {
   const info = {
     run: {
       displayName: 'Run',
@@ -24,7 +29,7 @@ export function getMetricMetaInfo(metric) {
       getIcon() {
         return (
           <View>
-            <MaterialIcons name="directions-run" color={white} size={35} />
+            <MaterialIcons name="directions-run" color={blue} size={35} />
           </View>
         );
       },
@@ -38,7 +43,7 @@ export function getMetricMetaInfo(metric) {
       getIcon() {
         return (
           <View>
-            <MaterialCommunityIcons name="bike" color={white} size={32} />
+            <MaterialCommunityIcons name="bike" color={blue} size={32} />
           </View>
         );
       },
@@ -52,7 +57,7 @@ export function getMetricMetaInfo(metric) {
       getIcon() {
         return (
           <View>
-            <MaterialCommunityIcons name="swim" color={white} size={35} />
+            <MaterialCommunityIcons name="swim" color={blue} size={35} />
           </View>
         );
       },
@@ -66,7 +71,7 @@ export function getMetricMetaInfo(metric) {
       getIcon() {
         return (
           <View>
-            <FontAwesome name="bed" color={white} size={30} />
+            <FontAwesome name="bed" color={blue} size={30} />
           </View>
         );
       },
@@ -80,21 +85,29 @@ export function getMetricMetaInfo(metric) {
       getIcon() {
         return (
           <View>
-            <MaterialCommunityIcons name="food" color={white} size={35} />
+            <MaterialCommunityIcons name="food" color={blue} size={35} />
           </View>
         );
       },
     },
   };
 
-  return typeof metric === 'undefined' ? info : info[metric];
-}
+  return metric ? info[metric] : info;
+};
 
-export function isBetween(num, x, y) {
-  return num >= x && num <= y;
-}
+/**
+ * Checks if num is between x and y
+ * @param {number} num
+ * @param {number} x
+ * @param {number} y
+ */
+const isBetween = (num, x, y) => num >= x && num <= y;
 
-export function calculateDirection(heading) {
+/**
+ * Calculates the direction you're heading
+ * @param {number} heading Angle you're heading
+ */
+const calculateDirection = heading => {
   let direction = '';
 
   if (isBetween(heading, 0, 22.5)) {
@@ -120,12 +133,24 @@ export function calculateDirection(heading) {
   }
 
   return direction;
-}
+};
 
-export function timeToString(time = Date.now()) {
+/**
+ * Returns a string representation of time
+ * @param {number} time Time in milliseconds
+ */
+const timeToString = (time = Date.now()) => {
   const date = new Date(time);
   const todayUTC = new Date(
     Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
   );
   return todayUTC.toISOString().split('T')[0];
-}
+};
+
+export {
+  getDailyReminderValue,
+  getMetricMetaInfo,
+  isBetween,
+  calculateDirection,
+  timeToString,
+};
