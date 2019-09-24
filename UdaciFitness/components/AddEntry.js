@@ -9,7 +9,7 @@ import DateHeader from './DateHeader';
 
 class AddEntry extends React.Component {
   static propTypes = {
-    alreadyLogged: PropTypes.bool.isRequired,
+    alreadyLogged: PropTypes.bool,
   };
 
   state = {
