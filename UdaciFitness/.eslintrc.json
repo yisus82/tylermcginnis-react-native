@@ -1,5 +1,9 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -18,8 +22,16 @@
     "no-debugger": 0,
     "no-alert": 0,
     "no-await-in-loop": 0,
-    "no-return-assign": ["error", "except-parens"],
-    "no-restricted-syntax": [2, "ForInStatement", "LabeledStatement", "WithStatement"],
+    "no-return-assign": [
+      "error",
+      "except-parens"
+    ],
+    "no-restricted-syntax": [
+      2,
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
     "no-unused-vars": [
       1,
       {
@@ -33,7 +45,10 @@
         "destructuring": "all"
       }
     ],
-    "arrow-body-style": [2, "as-needed"],
+    "arrow-body-style": [
+      2,
+      "as-needed"
+    ],
     "no-unused-expressions": [
       2,
       {
@@ -62,13 +77,17 @@
     "react/react-in-jsx-scope": 0,
     "react/prefer-stateless-function": 0,
     "react/forbid-prop-types": 0,
+    "react/destructuring-assignment": 0,
     "react/no-unescaped-entities": 0,
     "jsx-a11y/accessible-emoji": 0,
     "react/require-default-props": 0,
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
       }
     ],
     "radix": 0,
@@ -76,7 +95,14 @@
       2,
       {
         "hoist": "all",
-        "allow": ["resolve", "reject", "done", "next", "err", "error"]
+        "allow": [
+          "resolve",
+          "reject",
+          "done",
+          "next",
+          "err",
+          "error"
+        ]
       }
     ],
     "quotes": [
@@ -99,9 +125,13 @@
     "jsx-a11y/anchor-is-valid": [
       "warn",
       {
-        "aspects": ["invalidHref"]
+        "aspects": [
+          "invalidHref"
+        ]
       }
     ]
   },
-  "plugins": ["prettier"]
+  "plugins": [
+    "prettier"
+  ]
 }
