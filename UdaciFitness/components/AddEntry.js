@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Button, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { getMetricMetaInfo, timeToString } from '../utils/helpers';
+import { connect } from 'react-redux';
+import { addEntry } from '../actions';
+import {
+  getMetricMetaInfo,
+  timeToString,
+  getDailyReminderValue,
+} from '../utils/helpers';
 import { submitEntry, removeEntry } from '../utils/api';
 import UdaciSlider from './UdaciSlider';
 import UdaciSteppers from './UdaciSteppers';
@@ -11,6 +17,7 @@ import DateHeader from './DateHeader';
 class AddEntry extends React.Component {
   static propTypes = {
     alreadyLogged: PropTypes.bool,
+    dispatch: PropTypes.func,
   };
 
   state = {
@@ -59,8 +66,6 @@ class AddEntry extends React.Component {
     const key = timeToString();
     const entry = this.state;
 
-    // Update Redux
-
     this.setState(() => ({
       run: 0,
       bike: 0,
@@ -68,6 +73,13 @@ class AddEntry extends React.Component {
       sleep: 0,
       eat: 0,
     }));
+
+    // Update Redux
+    this.props.dispatch(
+      addEntry({
+        [key]: entry,
+      })
+    );
 
     // Navigate to home
 
@@ -84,6 +96,11 @@ class AddEntry extends React.Component {
     const key = timeToString();
 
     // Update Redux
+    this.props.dispatch(
+      addEntry({
+        [key]: getDailyReminderValue(),
+      })
+    );
 
     // Route to Home
 
@@ -97,7 +114,11 @@ class AddEntry extends React.Component {
     if (this.props.alreadyLogged) {
       return (
         <View>
-          <Ionicons name="ios-happy" size={100} />
+          <Ionicons
+            name="ios-happy"
+            size={100}
+            style={{ textAlign: 'center' }}
+          />
           <Text>You already logged your information for today.</Text>
           <Button title="Reset" onPress={this.reset} />
         </View>
@@ -137,4 +158,16 @@ class AddEntry extends React.Component {
   };
 }
 
-export default AddEntry;
+/**
+ * Maps state to props
+ * @param {object} state App state
+ */
+const mapStateToProps = state => {
+  const key = timeToString();
+
+  return {
+    alreadyLogged: state[key] && typeof state[key].today === 'undefined',
+  };
+};
+
+export default connect(mapStateToProps)(AddEntry);

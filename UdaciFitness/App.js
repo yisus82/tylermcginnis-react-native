@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import AddEntry from './components/AddEntry';
+import reducer from './reducers';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -13,8 +15,10 @@ const styles = StyleSheet.create({
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <AddEntry />
-    </View>
+    <Provider store={createStore(reducer)}>
+      <View style={styles.container}>
+        <AddEntry />
+      </View>
+    </Provider>
   );
 }

@@ -13,8 +13,11 @@ class UdaciSteppers extends React.Component {
 
   render = () => (
     <View>
-      <View>
-        <TouchableOpacity onPress={this.props.onDecrement}>
+      <View style={{ display: 'flex', flexDirection: 'row' }}>
+        <TouchableOpacity
+          style={{ marginRight: 10 }}
+          onPress={this.props.onDecrement}
+        >
           <FontAwesome name="minus" size={30} color="black" />
         </TouchableOpacity>
         <TouchableOpacity onPress={this.props.onIncrement}>
