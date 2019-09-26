@@ -1,17 +1,29 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   FontAwesome,
   MaterialIcons,
   MaterialCommunityIcons,
 } from '@expo/vector-icons';
-import { blue } from './colors';
+import { red, orange, blue, lightPurple, pink, white } from './colors';
 
 /**
  * Gets a daily reminder
  */
 const getDailyReminderValue = () => ({
   today: "👋 Don't forget to log your data today!",
+});
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    padding: 5,
+    borderRadius: 8,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20,
+  },
 });
 
 /**
@@ -28,8 +40,8 @@ const getMetricMetaInfo = (metric = '') => {
       type: 'steppers',
       getIcon() {
         return (
-          <View>
-            <MaterialIcons name="directions-run" color={blue} size={35} />
+          <View style={[styles.iconContainer, { backgroundColor: red }]}>
+            <MaterialIcons name="directions-run" color={white} size={35} />
           </View>
         );
       },
@@ -42,8 +54,8 @@ const getMetricMetaInfo = (metric = '') => {
       type: 'steppers',
       getIcon() {
         return (
-          <View>
-            <MaterialCommunityIcons name="bike" color={blue} size={32} />
+          <View style={[styles.iconContainer, { backgroundColor: orange }]}>
+            <MaterialCommunityIcons name="bike" color={white} size={32} />
           </View>
         );
       },
@@ -56,8 +68,8 @@ const getMetricMetaInfo = (metric = '') => {
       type: 'steppers',
       getIcon() {
         return (
-          <View>
-            <MaterialCommunityIcons name="swim" color={blue} size={35} />
+          <View style={[styles.iconContainer, { backgroundColor: blue }]}>
+            <MaterialCommunityIcons name="swim" color={white} size={35} />
           </View>
         );
       },
@@ -70,8 +82,10 @@ const getMetricMetaInfo = (metric = '') => {
       type: 'slider',
       getIcon() {
         return (
-          <View>
-            <FontAwesome name="bed" color={blue} size={30} />
+          <View
+            style={[styles.iconContainer, { backgroundColor: lightPurple }]}
+          >
+            <FontAwesome name="bed" color={white} size={30} />
           </View>
         );
       },
@@ -84,8 +98,8 @@ const getMetricMetaInfo = (metric = '') => {
       type: 'slider',
       getIcon() {
         return (
-          <View>
-            <MaterialCommunityIcons name="food" color={blue} size={35} />
+          <View style={[styles.iconContainer, { backgroundColor: pink }]}>
+            <MaterialCommunityIcons name="food" color={white} size={35} />
           </View>
         );
       },
