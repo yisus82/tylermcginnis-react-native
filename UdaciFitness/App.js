@@ -18,8 +18,13 @@ const Tabs = {
     screen: History,
     navigationOptions: {
       tabBarLabel: 'History',
-      tabBarIcon() {
-        return <Ionicons name="ios-bookmarks" size={30} />;
+      /**
+       * @param {{ tintColor: string; }} options Tab bar icon options
+       */
+      tabBarIcon(options) {
+        return (
+          <Ionicons name="ios-bookmarks" size={30} color={options.tintColor} />
+        );
       },
     },
   },
@@ -27,8 +32,14 @@ const Tabs = {
     screen: AddEntry,
     navigationOptions: {
       tabBarLabel: 'Add Entry',
-      tabBarIcon() {
-        return <FontAwesome name="plus-square" size={30} />;
+
+      /**
+       * @param {{ tintColor: string; }} options Tab bar icon options
+       */
+      tabBarIcon(options) {
+        return (
+          <FontAwesome name="plus-square" size={30} color={options.tintColor} />
+        );
       },
     },
   },
