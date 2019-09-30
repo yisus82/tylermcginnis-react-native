@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, StatusBar, SafeAreaView } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
@@ -7,6 +7,7 @@ import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
 } from 'react-navigation-tabs';
+import Constants from 'expo-constants';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import entriesReducer from './reducers';
 import AddEntry from './components/AddEntry';
@@ -72,9 +73,21 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(entriesReducer)}>
-        <View style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <View
+            style={{
+              backgroundColor: purple,
+              height: Constants.statusBarHeight,
+            }}
+          >
+            <StatusBar
+              translucent
+              backgroundColor={purple}
+              barStyle="light-content"
+            />
+          </View>
           <TabNav />
-        </View>
+        </SafeAreaView>
       </Provider>
     );
   }
