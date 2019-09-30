@@ -7,13 +7,6 @@ import {
 } from '@expo/vector-icons';
 import { red, orange, blue, lightPurple, pink, white } from './colors';
 
-/**
- * Gets a daily reminder
- */
-const getDailyReminderValue = () => ({
-  today: "👋 Don't forget to log your data today!",
-});
-
 const styles = StyleSheet.create({
   iconContainer: {
     padding: 5,
@@ -24,6 +17,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 20,
   },
+});
+
+/**
+ * Gets a daily reminder
+ */
+const getDailyReminderValue = () => ({
+  today: "👋 Don't forget to log your data today!",
 });
 
 /**

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { AppLoading } from 'expo';
 import UdaciFitnessCalendar from 'udacifitness-calendar';
 import { receiveEntries, addEntry } from '../actions';
 import { timeToString, getDailyReminderValue } from '../utils/helpers';
@@ -46,6 +47,10 @@ class History extends Component {
     entries: PropTypes.object,
   };
 
+  state = {
+    ready: false,
+  };
+
   componentDidMount = () => {
     const { dispatch } = this.props;
 
@@ -59,7 +64,8 @@ class History extends Component {
             })
           );
         }
-      });
+      })
+      .then(() => this.setState(() => ({ ready: true })));
   };
 
   /**
@@ -97,6 +103,11 @@ class History extends Component {
 
   render() {
     const { entries } = this.props;
+
+    const { ready } = this.state;
+    if (!ready) {
+      return <AppLoading />;
+    }
 
     return (
       <UdaciFitnessCalendar
