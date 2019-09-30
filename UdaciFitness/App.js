@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform, StatusBar, SafeAreaView } from 'react-native';
+import { View, Platform, StatusBar } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
@@ -73,7 +73,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(entriesReducer)}>
-        <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
           <View
             style={{
               backgroundColor: purple,
@@ -87,7 +87,7 @@ export default class App extends React.Component {
             />
           </View>
           <TabNav />
-        </SafeAreaView>
+        </View>
       </Provider>
     );
   }
