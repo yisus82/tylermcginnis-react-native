@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import MetricCard from './MetricCard';
+import { white } from '../utils/colors';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: white,
+    padding: 15,
+  },
+});
 
 class EntryDetail extends Component {
   static propTypes = {
-    navigation: PropTypes.object,
+    metrics: PropTypes.object,
   };
 
   static navigationOptions = ({ navigation }) => {
@@ -32,14 +43,29 @@ class EntryDetail extends Component {
     };
   };
 
-  render = () => (
-    <View>
-      <Text>
-        Entry Detail -
-        {JSON.stringify(this.props.navigation.state.params.entryId)}
-      </Text>
-    </View>
-  );
+  render = () => {
+    const { metrics } = this.props;
+
+    return (
+      <View style={styles.container}>
+        <MetricCard metrics={metrics} />
+      </View>
+    );
+  };
 }
 
-export default EntryDetail;
+/**
+ * Maps state to props
+ * @param {object} state State to map
+ * @param {object} navigation Navigation object
+ */
+const mapStateToProps = (state, { navigation }) => {
+  const { entryId } = navigation.state.params;
+
+  return {
+    entryId,
+    metrics: state[entryId],
+  };
+};
+
+export default connect(mapStateToProps)(EntryDetail);
