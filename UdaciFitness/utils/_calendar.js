@@ -62,6 +62,6 @@ const setMissingDates = dates => {
  * @param {string} results Results in JSON format
  */
 const formatCalendarResults = results =>
-  results === null ? setDummyData() : setMissingDates(JSON.parse(results));
+  results ? setMissingDates(JSON.parse(results)) : setDummyData();
 
 export { CALENDAR_STORAGE_KEY, formatCalendarResults };
