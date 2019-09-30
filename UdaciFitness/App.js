@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform, StatusBar } from 'react-native';
+import { View, Platform, StatusBar, Dimensions } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { createAppContainer } from 'react-navigation';
@@ -86,6 +86,7 @@ const MainNavigator = createAppContainer(
         headerStyle: {
           backgroundColor: purple,
         },
+        headerTitleStyle: { width: Dimensions.get('window').width },
       }),
     },
   })
