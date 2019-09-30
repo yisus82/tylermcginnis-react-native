@@ -45,6 +45,7 @@ class History extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     entries: PropTypes.object,
+    navigation: PropTypes.object,
   };
 
   state = {
@@ -73,7 +74,7 @@ class History extends Component {
    * @param {object} item Item to render
    * @param {string} formattedDate Formatted date
    */
-  renderItem = ({ today, ...metrics }, formattedDate) => (
+  renderItem = ({ today, ...metrics }, formattedDate, key) => (
     <View style={styles.item}>
       {today ? (
         <View>
@@ -81,7 +82,11 @@ class History extends Component {
           <Text style={styles.noDataText}>{today}</Text>
         </View>
       ) : (
-        <TouchableOpacity onPress={() => console.log('Pressed!')}>
+        <TouchableOpacity
+          onPress={() =>
+            this.props.navigation.navigate('EntryDetail', { entryId: key })
+          }
+        >
           <MetricCard date={formattedDate} metrics={metrics} />
         </TouchableOpacity>
       )}

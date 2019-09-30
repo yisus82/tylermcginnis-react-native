@@ -7,12 +7,14 @@ import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
 } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 import Constants from 'expo-constants';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import entriesReducer from './reducers';
+import { white, purple } from './utils/colors';
 import AddEntry from './components/AddEntry';
 import History from './components/History';
-import { white, purple } from './utils/colors';
+import EntryDetail from './components/EntryDetail';
 
 const Tabs = {
   History: {
@@ -69,6 +71,26 @@ const TabNav = createAppContainer(
     : createMaterialTopTabNavigator(Tabs, navigationOptions)
 );
 
+const MainNavigator = createAppContainer(
+  createStackNavigator({
+    Home: {
+      screen: TabNav,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    EntryDetail: {
+      screen: EntryDetail,
+      navigationOptions: () => ({
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple,
+        },
+      }),
+    },
+  })
+);
+
 export default class App extends React.Component {
   render() {
     return (
@@ -86,7 +108,7 @@ export default class App extends React.Component {
               barStyle="light-content"
             />
           </View>
-          <TabNav />
+          <MainNavigator />
         </View>
       </Provider>
     );
