@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { Location, Permissions } from 'expo';
 import { Foundation } from '@expo/vector-icons';
 import { purple, white } from '../utils/colors';
+import { calculateDirection } from '../utils/helpers';
 
 const styles = StyleSheet.create({
   container: {
@@ -70,8 +72,42 @@ const styles = StyleSheet.create({
 export default class Live extends Component {
   state = {
     coords: null,
-    status: 'granted',
+    status: null,
     direction: '',
+  };
+
+  componentDidMount = () => {
+    Permissions.getAsync(Permissions.LOCATION)
+      .then(({ status }) => {
+        if (status === 'granted') {
+          return this.setLocation();
+        }
+
+        this.setState(() => ({ status }));
+      })
+      .catch(error => {
+        console.warn('Error getting Location permission: ', error);
+
+        this.setState(() => ({ status: 'undetermined' }));
+      });
+  };
+
+  setLocation = () => {
+    Location.watchPositionAsync(
+      {
+        enableHighAccuracy: true,
+        timeInterval: 1,
+        distanceInterval: 1,
+      },
+      ({ coords }) => {
+        const newDirection = calculateDirection(coords.heading);
+        this.setState(() => ({
+          coords,
+          status: 'granted',
+          direction: newDirection,
+        }));
+      }
+    );
   };
 
   askPermission = () => {};
