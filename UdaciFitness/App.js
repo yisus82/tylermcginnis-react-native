@@ -15,6 +15,7 @@ import { white, purple } from './utils/colors';
 import AddEntry from './components/AddEntry';
 import History from './components/History';
 import EntryDetail from './components/EntryDetail';
+import Live from './components/Live';
 
 const Tabs = {
   History: {
@@ -35,13 +36,30 @@ const Tabs = {
     screen: AddEntry,
     navigationOptions: {
       tabBarLabel: 'Add Entry',
-
       /**
        * @param {{ tintColor: string; }} options Tab bar icon options
        */
       tabBarIcon(options) {
         return (
           <FontAwesome name="plus-square" size={30} color={options.tintColor} />
+        );
+      },
+    },
+  },
+  Live: {
+    screen: Live,
+    navigationOptions: {
+      tabBarLabel: 'Live',
+      /**
+       * @param {{ tintColor: string; }} options Tab bar icon options
+       */
+      tabBarIcon(options) {
+        return (
+          <Ionicons
+            name="ios-speedometer"
+            size={30}
+            color={options.tintColor}
+          />
         );
       },
     },
