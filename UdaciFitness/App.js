@@ -12,6 +12,7 @@ import Constants from 'expo-constants';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import entriesReducer from './reducers';
 import { white, purple } from './utils/colors';
+import { setLocalNotification } from './utils/helpers';
 import AddEntry from './components/AddEntry';
 import History from './components/History';
 import EntryDetail from './components/EntryDetail';
@@ -111,6 +112,10 @@ const MainNavigator = createAppContainer(
 );
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(entriesReducer)}>

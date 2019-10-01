@@ -15,6 +15,8 @@ import {
   getMetricMetaInfo,
   timeToString,
   getDailyReminderValue,
+  clearLocalNotification,
+  setLocalNotification,
 } from '../utils/helpers';
 import { submitEntry, removeEntry } from '../utils/api';
 import { purple, white } from '../utils/colors';
@@ -142,6 +144,7 @@ class AddEntry extends React.Component {
     submitEntry(key, entry);
 
     // Clear local notification
+    clearLocalNotification().then(setLocalNotification);
   };
 
   /**
