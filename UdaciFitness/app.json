@@ -25,6 +25,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Project from the course React Native at TylerMcGinnis.com",
+    "githubUrl": "https://github.com/yisus82/tylermcginnis-react-native"
   }
 }
