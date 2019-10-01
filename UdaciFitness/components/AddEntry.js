@@ -7,8 +7,9 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
+import { Ionicons } from '@expo/vector-icons';
 import { addEntry } from '../actions';
 import {
   getMetricMetaInfo,
@@ -70,6 +71,7 @@ class AddEntry extends React.Component {
   static propTypes = {
     alreadyLogged: PropTypes.bool,
     dispatch: PropTypes.func,
+    navigation: PropTypes.object,
   };
 
   state = {
@@ -134,6 +136,7 @@ class AddEntry extends React.Component {
     );
 
     // Navigate to home
+    this.toHome();
 
     // Save to "DB"
     submitEntry(key, entry);
@@ -155,9 +158,14 @@ class AddEntry extends React.Component {
     );
 
     // Route to Home
+    this.toHome();
 
     // Update "DB"
     removeEntry(key);
+  };
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({ key: 'AddEntry' }));
   };
 
   render = () => {
